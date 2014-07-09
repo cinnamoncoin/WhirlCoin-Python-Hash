@@ -27,21 +27,21 @@
  * online backup system.
  */
 
-#include "blake.h"
+#include "whirlpool.h"
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
 #include <stdio.h>
-#include "sphlib/sph_blake.h"
+#include "sphlib/sph_whirlpool.h"
 
 
-void blake_hash(const char* input, char* output)
+void whirlpool_hash(const char* input, char* output)
 {
-    sph_whirlpool1_context     ctx_blake;
+    sph_whirlpool1_context     ctx_whirlpool;
     uint32_t hash[16];
-    sph_whirlpool1_init(&ctx_blake);
-    sph_whirlpool1 (&ctx_blake, input, 80);
-    sph_whirlpool1_close (&ctx_blake, hash);
+    sph_whirlpool1_init(&ctx_whirlpool);
+    sph_whirlpool1 (&ctx_whirlpool, input, 80);
+    sph_whirlpool1_close (&ctx_whirlpool, hash);
     memcpy(output, hash, 32);
 }
 

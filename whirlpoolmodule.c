@@ -1,6 +1,6 @@
 #include <Python.h>
 
-#include "Whirlpool.h"
+#include "whirlpool.h"
 
 static PyObject *Whirlpool_getpowhash(PyObject *self, PyObject *args)
 {
