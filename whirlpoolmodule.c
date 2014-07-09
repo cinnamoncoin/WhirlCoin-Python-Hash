@@ -2,7 +2,7 @@
 
 #include "whirlpool.h"
 
-static PyObject *Whirlpool_getpowhash(PyObject *self, PyObject *args)
+static PyObject *whirlpool_getpowhash(PyObject *self, PyObject *args)
 {
     char *output;
     PyObject *value;
@@ -17,9 +17,9 @@ static PyObject *Whirlpool_getpowhash(PyObject *self, PyObject *args)
     output = PyMem_Malloc(32);
 
 #if PY_MAJOR_VERSION >= 3
-    Whirlpool_hash((char *)PyBytes_AsString((PyObject*) input), output);
+    whirlpool_hash((char *)PyBytes_AsString((PyObject*) input), output);
 #else
-    Whirlpool_hash((char *)PyString_AsString((PyObject*) input), output);
+    whirlpool_hash((char *)PyString_AsString((PyObject*) input), output);
 #endif
     Py_DECREF(input);
 #if PY_MAJOR_VERSION >= 3
@@ -31,27 +31,27 @@ static PyObject *Whirlpool_getpowhash(PyObject *self, PyObject *args)
     return value;
 }
 
-static PyMethodDef WhirlpoolMethods[] = {
-    { "getPoWHash", Whirlpool_getpowhash, METH_VARARGS, "Returns the proof of work hash using Whirlpool hash" },
+static PyMethodDef whirlpoolMethods[] = {
+    { "getPoWHash", whirlpool_getpowhash, METH_VARARGS, "Returns the proof of work hash using whirlpool hash" },
     { NULL, NULL, 0, NULL }
 };
 
 #if PY_MAJOR_VERSION >= 3
-static struct PyModuleDef WhirlpoolModule = {
+static struct PyModuleDef whirlpoolModule = {
     PyModuleDef_HEAD_INIT,
-    "Whirlpool_hash",
+    "whirlpool_hash",
     "...",
     -1,
-    WhirlpoolMethods
+    whirlpoolMethods
 };
 
-PyMODINIT_FUNC PyInit_Whirlpool_hash(void) {
-    return PyModule_Create(&WhirlpoolModule);
+PyMODINIT_FUNC PyInit_whirlpool_hash(void) {
+    return PyModule_Create(&whirlpoolModule);
 }
 
 #else
 
-PyMODINIT_FUNC initWhirlpool_hash(void) {
-    (void) Py_InitModule("Whirlpool_hash", WhirlpoolMethods);
+PyMODINIT_FUNC initwhirlpool_hash(void) {
+    (void) Py_InitModule("whirlpool_hash", whirlpoolMethods);
 }
 #endif
